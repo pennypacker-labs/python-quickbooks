@@ -200,7 +200,7 @@ class QuickBooks(object):
 
         req = self.session.request(request_type, url, True, self.company_id, headers=headers, params=params, data=request_body)
         if req.status_code == httplib.UNAUTHORIZED:
-            raise AuthorizationException("Application authentication failed")
+            raise AuthorizationException("Application authentication failed", detail=req.text)
 
         try:
             result = req.json()
